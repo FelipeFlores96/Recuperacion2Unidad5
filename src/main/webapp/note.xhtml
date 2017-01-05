@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<body>
+	<h1>Notes</h1>
+	<h:form id="frmNote">
+	Tittle:<h:inputText value="#{noteController.note.tittle}" />
+	Desription:<h:inputText value="#{noteController.note.description}" />
+	Importance:<h:inputText value="#{noteController.note.importance}" />
+		<h:commandButton action="#{noteController.save}" value="Save">
+			<f:ajax execute="frmNote" render="frmNote" />
+		</h:commandButton>
+		<h:commandButton rendered="#{noteController.editMode}"
+			action="#{noteController.cancel}" value="Cancel">
+			<f:ajax render="frmNote"></f:ajax>
+		</h:commandButton>
+		<h:dataTable value="#{noteController.notes}" var="n" id="dtNote">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+		 #{n.id} </h:column>
+			<h:column>
+				<f:facet name="header">Tittle</f:facet>
+		 #{n.tittle} </h:column>
+			<h:column>
+				<f:facet name="header">Description</f:facet>
+		 #{n.description} </h:column>
+			<h:column>
+				<f:facet name="header">Importance</f:facet>
+		 #{n.importance} </h:column>
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{noteController.delete(n)}" value="Delete"
+					onClick="return window.confirm ('Are you sure?')">
+					<f:ajax render="frmNote:dtNote" />
+				</h:commandButton>
+				<h:commandButton action="#{noteController.update(n)}" value="Update">
+					<f:ajax render="frmNote" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</body>
+
+
+</html>

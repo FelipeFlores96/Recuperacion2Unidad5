@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<body>
+	<h1>Role</h1>
+	<h:form id="frmRole">
+	Portal ID:<h:inputText value="#{roleController.role.portalId}" />
+	Role Name:<h:inputText value="#{roleController.role.roleName}" />
+	Description:<h:inputText value="#{roleController.role.description}" />
+	Service Fee:<h:inputText value="#{roleController.role.serviceFee}" />
+	Billing Frequency:<h:inputText value="#{roleController.role.billingFrequency}" />
+	Trial Period:<h:inputText value="#{roleController.role.trialPeriod}" />
+	Trial Frequency:<h:inputText value="#{roleController.role.trialFrequency}" />
+	Billing Period:<h:inputText value="#{roleController.role.billingPeriod}" />
+	Trial Fee:<h:inputText value="#{roleController.role.trialFee}" />
+	Is Public:<h:inputText value="#{roleController.role.isPublic}" />
+	Auto Assignament:<h:inputText value="#{roleController.role.autoAssignament}" />
+	Role Group ID:<h:inputText value="#{roleController.role.roleGroupId}" />
+		<h:commandButton action="#{roleController.save}" value="Save">
+			<f:ajax execute="frmRole" render="frmRole" />
+		</h:commandButton>
+		<h:commandButton rendered="#{roleController.editMode}"
+			action="#{roleController.cancel}" value="Cancel">
+			<f:ajax render="frmRole"></f:ajax>
+		</h:commandButton>
+		<h:dataTable value="#{roleController.roles}" var="r" id="dtRole">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+		 #{r.roleId} </h:column>
+			<h:column>
+				<f:facet name="header">Portal ID</f:facet>
+		 #{r.portalId} </h:column>
+			<h:column>
+				<f:facet name="header">Role Name</f:facet>
+		 #{r.roleName} </h:column>
+			<h:column>
+				<f:facet name="header">Service Fee</f:facet>
+		 #{r.serviceFee} </h:column>
+		 <h:column>
+				<f:facet name="header">Billing Frequency</f:facet>
+		 #{r.billingFrequency} </h:column>
+		 <h:column>
+				<f:facet name="header">Trial Period</f:facet>
+		 #{r.trialPeriod} </h:column>
+		 <h:column>
+				<f:facet name="header">Trial Frecquency</f:facet>
+		 #{r.trialFrequency} </h:column>
+		 <h:column>
+				<f:facet name="header">Billing Period</f:facet>
+		 #{r.billingPeriod} </h:column>
+		 <h:column>
+				<f:facet name="header">Trial Fee</f:facet>
+		 #{r.trialFee} </h:column>
+		 <h:column>
+				<f:facet name="header">Is Public</f:facet>
+		 #{r.isPublic} </h:column>
+		 <h:column>
+				<f:facet name="header">Auto Assignament</f:facet>
+		 #{r.autoAssignament} </h:column>
+		 <h:column>
+				<f:facet name="header">Role Group ID</f:facet>
+		 #{r.roleGroupId} </h:column>
+		 
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{roleController.delete(r)}" value="Delete"
+					onClick="return window.confirm ('Are you sure?')">
+					<f:ajax render="frmRole:dtRole" />
+				</h:commandButton>
+				<h:commandButton action="#{roleController.update(r)}" value="Update">
+					<f:ajax render="frmRole" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</body>
+
+
+</html>
